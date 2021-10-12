@@ -1,0 +1,73 @@
+\hypertarget{classIMUFusion}{}\section{I\+M\+U\+Fusion Class Reference}
+\label{classIMUFusion}\index{I\+M\+U\+Fusion@{I\+M\+U\+Fusion}}
+
+
+A class to encapsulate Madgwick Fusion access.  
+
+
+
+
+{\ttfamily \#include $<$I\+M\+U\+Fusion.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classIMUFusion_ab4624c7f974e2e9328b62a6b945dbeb4}\label{classIMUFusion_ab4624c7f974e2e9328b62a6b945dbeb4}} 
+\hyperlink{classIMUFusion_ab4624c7f974e2e9328b62a6b945dbeb4}{I\+M\+U\+Fusion} (float i\+Sample\+Period=0.\+004f, float i\+Stationary\+Threshold=0.\+5f, float i\+Ahrs\+Gain=0.\+5f, float i\+Gyro\+Sensitivity=\+G\+Y\+R\+O\+\_\+\+S\+E\+N\+S\+I\+T\+I\+V\+I\+T\+Y, float i\+Accel\+Sensitivity=\+A\+C\+C\+E\+L\+\_\+\+S\+E\+N\+S\+I\+T\+I\+V\+I\+T\+Y)
+\begin{DoxyCompactList}\small\item\em Constructor. Configures Madgwick Fusion for Real\+Sense camera I\+MU. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classIMUFusion_adee08e1eb18efbe29208619cf3aba857}\label{classIMUFusion_adee08e1eb18efbe29208619cf3aba857}} 
+virtual \hyperlink{classIMUFusion_adee08e1eb18efbe29208619cf3aba857}{$\sim$\+I\+M\+U\+Fusion} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+Fusion\+Euler\+Angles \hyperlink{classIMUFusion_a47060c975f3a11d03dca5de9de1e8098}{fuse} (rs2\+\_\+vector \&gyro\+Data, rs2\+\_\+vector \&accel\+Data)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classIMUFusion_ab0606b1bd85ac4b5c60296f4d11f8aad}\label{classIMUFusion_ab0606b1bd85ac4b5c60296f4d11f8aad}} 
+Fusion\+Vector3 {\bfseries gyro\+Sensitivity}
+\item 
+\mbox{\Hypertarget{classIMUFusion_aeb57532923c759a15220d4e1480a9793}\label{classIMUFusion_aeb57532923c759a15220d4e1480a9793}} 
+Fusion\+Vector3 {\bfseries accel\+Sensitivity}
+\item 
+\mbox{\Hypertarget{classIMUFusion_a190967d6da7b3375520be36f5cd0c88f}\label{classIMUFusion_a190967d6da7b3375520be36f5cd0c88f}} 
+Fusion\+Vector3 {\bfseries hard\+Iron\+Bias}
+\item 
+\mbox{\Hypertarget{classIMUFusion_add7a4e02f169aa10e13f4dfb718d0875}\label{classIMUFusion_add7a4e02f169aa10e13f4dfb718d0875}} 
+Fusion\+Bias {\bfseries bias}
+\item 
+\mbox{\Hypertarget{classIMUFusion_a1290813d01c634775a0ffb4f3fef80eb}\label{classIMUFusion_a1290813d01c634775a0ffb4f3fef80eb}} 
+Fusion\+Ahrs {\bfseries ahrs}
+\item 
+\mbox{\Hypertarget{classIMUFusion_a9d546ef52bd0f573486527f6f9e57138}\label{classIMUFusion_a9d546ef52bd0f573486527f6f9e57138}} 
+float {\bfseries sample\+Period}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class to encapsulate Madgwick Fusion access. 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIMUFusion_a47060c975f3a11d03dca5de9de1e8098}\label{classIMUFusion_a47060c975f3a11d03dca5de9de1e8098}} 
+\index{I\+M\+U\+Fusion@{I\+M\+U\+Fusion}!fuse@{fuse}}
+\index{fuse@{fuse}!I\+M\+U\+Fusion@{I\+M\+U\+Fusion}}
+\subsubsection{\texorpdfstring{fuse()}{fuse()}}
+{\footnotesize\ttfamily Fusion\+Euler\+Angles I\+M\+U\+Fusion\+::fuse (\begin{DoxyParamCaption}\item[{rs2\+\_\+vector \&}]{gyro\+Data,  }\item[{rs2\+\_\+vector \&}]{accel\+Data }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em gyro\+Data} & A gyroscopic orientation 3-\/vector of type rs2\+\_\+vector \\
+\hline
+\mbox{\tt in}  & {\em accel\+Data} & An acceleration 3-\/vector of type rs2\+\_\+vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Fusion\+Euler\+Angles structure containing the Roll, Pitch, and Yaw in degrees 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{IMUFusion_8hpp}{I\+M\+U\+Fusion.\+hpp}\item 
+\hyperlink{IMUFusion_8cpp}{I\+M\+U\+Fusion.\+cpp}\end{DoxyCompactItemize}

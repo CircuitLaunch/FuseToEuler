@@ -1,0 +1,115 @@
+\hypertarget{classRealFusion}{}\section{Real\+Fusion Class Reference}
+\label{classRealFusion}\index{Real\+Fusion@{Real\+Fusion}}
+
+
+A class to encapsulate librealsense2 and Fusion access.  
+
+
+
+
+{\ttfamily \#include $<$Real\+Fusion.\+hpp$>$}
+
+
+
+Collaboration diagram for Real\+Fusion\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=146pt]{classRealFusion__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRealFusion_a9632f71572a51d7db415793e1976a958}{Real\+Fusion} ()  throw (\+Exception)
+\begin{DoxyCompactList}\small\item\em Constructor. Checks I\+MU available, initializes librealsense. \end{DoxyCompactList}\item 
+virtual \hyperlink{classRealFusion_a2b1dd81581a3b922da3d8231d71524ce}{$\sim$\+Real\+Fusion} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+bool \hyperlink{classRealFusion_a77329f8bfa4390754ddb1c72b58281ff}{check\+I\+MU} ()
+\begin{DoxyCompactList}\small\item\em Checks availability of I\+MU. \end{DoxyCompactList}\item 
+void \hyperlink{classRealFusion_a0fa5b36d1b32622ec65c41e2c3852c2f}{tick} ()
+\begin{DoxyCompactList}\small\item\em Retrieves frames from librealsense2, extracts I\+MU data, and calls Fusion to perform Madgwick fusion to obtain Euler orientation which it caches in the angles public member. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRealFusion_ab67b42c3cc2f4dffefa894d96b82751b}\label{classRealFusion_ab67b42c3cc2f4dffefa894d96b82751b}} 
+Fusion\+Euler\+Angles {\bfseries angles}
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRealFusion_aa8e9a57cb02c2151f3783e88f8e0b662}\label{classRealFusion_aa8e9a57cb02c2151f3783e88f8e0b662}} 
+rs2\+::pipeline {\bfseries pl}
+\item 
+\mbox{\Hypertarget{classRealFusion_a041aa40f221d98af87b4ebfc0138b83a}\label{classRealFusion_a041aa40f221d98af87b4ebfc0138b83a}} 
+\hyperlink{classIMUFusion}{I\+M\+U\+Fusion} {\bfseries fuser}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class to encapsulate librealsense2 and Fusion access. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classRealFusion_a9632f71572a51d7db415793e1976a958}\label{classRealFusion_a9632f71572a51d7db415793e1976a958}} 
+\index{Real\+Fusion@{Real\+Fusion}!Real\+Fusion@{Real\+Fusion}}
+\index{Real\+Fusion@{Real\+Fusion}!Real\+Fusion@{Real\+Fusion}}
+\subsubsection{\texorpdfstring{Real\+Fusion()}{RealFusion()}}
+{\footnotesize\ttfamily Real\+Fusion\+::\+Real\+Fusion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throw  \hyperlink{classException}{Exception}) }
+
+
+
+Constructor. Checks I\+MU available, initializes librealsense. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRealFusion_a2b1dd81581a3b922da3d8231d71524ce}\label{classRealFusion_a2b1dd81581a3b922da3d8231d71524ce}} 
+\index{Real\+Fusion@{Real\+Fusion}!````~Real\+Fusion@{$\sim$\+Real\+Fusion}}
+\index{````~Real\+Fusion@{$\sim$\+Real\+Fusion}!Real\+Fusion@{Real\+Fusion}}
+\subsubsection{\texorpdfstring{$\sim$\+Real\+Fusion()}{~RealFusion()}}
+{\footnotesize\ttfamily Real\+Fusion\+::$\sim$\+Real\+Fusion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classRealFusion_a77329f8bfa4390754ddb1c72b58281ff}\label{classRealFusion_a77329f8bfa4390754ddb1c72b58281ff}} 
+\index{Real\+Fusion@{Real\+Fusion}!check\+I\+MU@{check\+I\+MU}}
+\index{check\+I\+MU@{check\+I\+MU}!Real\+Fusion@{Real\+Fusion}}
+\subsubsection{\texorpdfstring{check\+I\+M\+U()}{checkIMU()}}
+{\footnotesize\ttfamily bool Real\+Fusion\+::check\+I\+MU (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks availability of I\+MU. 
+
+\begin{DoxyReturn}{Returns}
+true if I\+MU exists, false if not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classRealFusion_a0fa5b36d1b32622ec65c41e2c3852c2f}\label{classRealFusion_a0fa5b36d1b32622ec65c41e2c3852c2f}} 
+\index{Real\+Fusion@{Real\+Fusion}!tick@{tick}}
+\index{tick@{tick}!Real\+Fusion@{Real\+Fusion}}
+\subsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily void Real\+Fusion\+::tick (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retrieves frames from librealsense2, extracts I\+MU data, and calls Fusion to perform Madgwick fusion to obtain Euler orientation which it caches in the angles public member. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{RealFusion_8hpp}{Real\+Fusion.\+hpp}\item 
+\hyperlink{RealFusion_8cpp}{Real\+Fusion.\+cpp}\end{DoxyCompactItemize}

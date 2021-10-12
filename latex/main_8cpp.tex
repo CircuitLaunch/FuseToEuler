@@ -1,0 +1,54 @@
+\hypertarget{main_8cpp}{}\section{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.\+cpp@{main.\+cpp}}
+
+
+Fuse\+To\+Euler shows how to incorporate Sebastian Madgwick\textquotesingle{}s sensor fusion library to fuse raw I\+MU gyroscope and accelerometer telemetry from Real\+Sense cameras.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$csignal$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$atomic$>$}\newline
+{\ttfamily \#include \char`\"{}Real\+Fusion.\+hpp\char`\"{}}\newline
+Include dependency graph for main.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8cpp_a9b99e599116053d9c4debd54231d2868}\label{main_8cpp_a9b99e599116053d9c4debd54231d2868}} 
+void {\bfseries sigint\+Handler} (int i\+Sig\+Num)
+\item 
+\mbox{\Hypertarget{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8cpp_ad87b684fbf7e057a5c08e1b0016dfe79}\label{main_8cpp_ad87b684fbf7e057a5c08e1b0016dfe79}} 
+atomic$<$ bool $>$ {\bfseries alive} \{true\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Fuse\+To\+Euler shows how to incorporate Sebastian Madgwick\textquotesingle{}s sensor fusion library to fuse raw I\+MU gyroscope and accelerometer telemetry from Real\+Sense cameras. 
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (C) 2021 Edward Janne -\/ All Rights Reserved
+\end{DoxyCopyright}
+\hypertarget{RealFusion_8hpp_LICENSE}{}\subsection{L\+I\+C\+E\+N\+SE}\label{RealFusion_8hpp_LICENSE}
+This file is part of Fuse\+To\+Euler.
+
+Fuse\+To\+Euler is free software\+: you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+Fuse\+To\+Euler is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with Fuse\+To\+Euler. If not, see \href{https://www.gnu.org/licenses/}{\tt https\+://www.\+gnu.\+org/licenses/}.
+
+\begin{DoxyAuthor}{Author}
+Edward Janne 
+\end{DoxyAuthor}

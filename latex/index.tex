@@ -1,0 +1,36 @@
+\hypertarget{index_intro_sec}{}\section{Introduction}\label{index_intro_sec}
+\begin{DoxyParagraph}{}
+Many Real\+Sense cameras come with an embedded 6\+D\+OF Inertial Motion Unit (I\+MU) which measures rotation with a gyroscope and acceleration with an accelerometer. Unfortunately, with the exception of the Real\+Sense T265 tracking camera, this data is unfused, meaning that the data from each is N\+OT used to compensate for noise in the other. For example, when used naïvely, the raw orientation data is affected by any camera motion because there is no inherent way for the sensor to know whether an applied force is from gravity or another motive force. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Fusion algorithms \char`\"{}merge\char`\"{} the telemetry from independent sensor streams to create more stable results. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The Madgwick algorithm, named after Sebastian Madgwick who developed this algorithm in 2009, is one of the most popular ones. Fortunately for us, there is an open source library which implements this algorithm, ready to plunk into our code. In this tutorial, I will outline how to use it to derive the Euler orientation from the Real\+Sense gyroscope and accelerometer data. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+I am programming in C/\+C++ on a Jetson A\+GX Xavier and using a Real\+Sense L515 Li\+D\+AR camera. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+If you haven\textquotesingle{}t set up {\ttfamily librealsense2} yet, please see this \href{https://www.notion.so/How-to-install-librealsense-and-pylibrealsense-on-Jetson-5b909aeb1b6c409fb21464f2db869d41}{\tt tutorial} on installing it. 
+\end{DoxyParagraph}
+\hypertarget{index_download_sec}{}\section{Obtaining the Madgwick Library}\label{index_download_sec}
+\begin{DoxyParagraph}{}
+Clone the repo from github. 
+\begin{DoxyCode}
+cd ~/Documents
+git clone https://github.com/xioTechnologies/Fusion.git Fusion-master
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+I did not create a library from this source, but rather compiled and linked the source code directly into my program. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Copy or move the Fusion directory from Fusion-\/master to your project directory. 
+\begin{DoxyCode}
+mkdir FuseToEuler
+cp -R Fusion-master/Fusion FuseToEuler
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}

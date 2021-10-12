@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7eimufusion',['~IMUFusion',['../classIMUFusion.html#adee08e1eb18efbe29208619cf3aba857',1,'IMUFusion']]],
-  ['_7erealfusion',['~RealFusion',['../classRealFusion.html#a2b1dd81581a3b922da3d8231d71524ce',1,'RealFusion']]]
+  ['siginthandler',['sigintHandler',['../main_8cpp.html#a9b99e599116053d9c4debd54231d2868',1,'main.cpp']]]
 ];

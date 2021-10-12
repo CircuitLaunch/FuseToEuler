@@ -88,17 +88,18 @@ Include dependency graph for main.cpp:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9b99e599116053d9c4debd54231d2868"><td class="memItemLeft" align="right" valign="top"><a id="a9b99e599116053d9c4debd54231d2868"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>sigintHandler</b> (int iSigNum)</td></tr>
+<tr class="memitem:a9b99e599116053d9c4debd54231d2868"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a9b99e599116053d9c4debd54231d2868">sigintHandler</a> (int iSigNum)</td></tr>
+<tr class="memdesc:a9b99e599116053d9c4debd54231d2868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler function for SIGINT.  <a href="#a9b99e599116053d9c4debd54231d2868">More...</a><br /></td></tr>
 <tr class="separator:a9b99e599116053d9c4debd54231d2868"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top"><a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (int argc, char **argv)</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execution starts here.  <a href="#a3c04138a5bfe5d72780bb7e82a18e627">More...</a><br /></td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ad87b684fbf7e057a5c08e1b0016dfe79"><td class="memItemLeft" align="right" valign="top"><a id="ad87b684fbf7e057a5c08e1b0016dfe79"></a>
-atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>alive</b> {true}</td></tr>
+atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ad87b684fbf7e057a5c08e1b0016dfe79">alive</a> {true}</td></tr>
+<tr class="memdesc:ad87b684fbf7e057a5c08e1b0016dfe79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Atomically accessed variable shared between main process and interrupt handler. Enables interrupt handler to signal that the process should terminate. <br /></td></tr>
 <tr class="separator:ad87b684fbf7e057a5c08e1b0016dfe79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -111,7 +112,60 @@ LICENSE</h1>
 <p>FuseToEuler is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License along with FuseToEuler. If not, see <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.</p>
 <dl class="section author"><dt>Author</dt><dd>Edward Janne </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Execution starts here. </p>
+<p>Installs an interrupt handler to intercept Ctrl-C interrupts. Then instantiates a <a class="el" href="classRealFusion.html" title="A class to encapsulate librealsense2 and Fusion access. ">RealFusion</a> class, and enters an infinite loop in which it repeatedly calls <a class="el" href="classRealFusion.html#a0fa5b36d1b32622ec65c41e2c3852c2f" title="Performs the fusion. ">RealFusion::tick()</a> to get IMU telemetry and fuse it to derive stable Euler orientation. Every second, the current orientation is printed to the console. </p>
+
+</div>
+</div>
+<a id="a9b99e599116053d9c4debd54231d2868"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b99e599116053d9c4debd54231d2868">&#9670;&nbsp;</a></span>sigintHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sigintHandler </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iSigNum</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Handler function for SIGINT. </p>
+<p>The address of this function is attached as the SIGINT interrupt handler in the main function. It sets the atomic variable, alive, to false. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

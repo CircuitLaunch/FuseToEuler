@@ -76,15 +76,11 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab4624c7f974e2e9328b62a6b945dbeb4"><td class="memItemLeft" align="right" valign="top"><a id="ab4624c7f974e2e9328b62a6b945dbeb4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMUFusion.html#ab4624c7f974e2e9328b62a6b945dbeb4">IMUFusion</a> (float iSamplePeriod=0.004f, float iStationaryThreshold=0.5f, float iAhrsGain=0.5f, float iGyroSensitivity=GYRO_SENSITIVITY, float iAccelSensitivity=ACCEL_SENSITIVITY)</td></tr>
-<tr class="memdesc:ab4624c7f974e2e9328b62a6b945dbeb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Configures Madgwick Fusion for RealSense camera IMU. <br /></td></tr>
+<tr class="memitem:ab4624c7f974e2e9328b62a6b945dbeb4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMUFusion.html#ab4624c7f974e2e9328b62a6b945dbeb4">IMUFusion</a> (float iSamplePeriod=0.004f, float iStationaryThreshold=0.5f, float iAhrsGain=0.5f, float iGyroSensitivity=GYRO_SENSITIVITY, float iAccelSensitivity=ACCEL_SENSITIVITY)</td></tr>
+<tr class="memdesc:ab4624c7f974e2e9328b62a6b945dbeb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor.  <a href="#ab4624c7f974e2e9328b62a6b945dbeb4">More...</a><br /></td></tr>
 <tr class="separator:ab4624c7f974e2e9328b62a6b945dbeb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adee08e1eb18efbe29208619cf3aba857"><td class="memItemLeft" align="right" valign="top"><a id="adee08e1eb18efbe29208619cf3aba857"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMUFusion.html#adee08e1eb18efbe29208619cf3aba857">~IMUFusion</a> ()</td></tr>
-<tr class="memdesc:adee08e1eb18efbe29208619cf3aba857"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
-<tr class="separator:adee08e1eb18efbe29208619cf3aba857"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47060c975f3a11d03dca5de9de1e8098"><td class="memItemLeft" align="right" valign="top">FusionEulerAngles&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIMUFusion.html#a47060c975f3a11d03dca5de9de1e8098">fuse</a> (rs2_vector &amp;gyroData, rs2_vector &amp;accelData)</td></tr>
+<tr class="memdesc:a47060c975f3a11d03dca5de9de1e8098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fuses gyro and accel data into Euler angles.  <a href="#a47060c975f3a11d03dca5de9de1e8098">More...</a><br /></td></tr>
 <tr class="separator:a47060c975f3a11d03dca5de9de1e8098"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -110,7 +106,57 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>samplePeriod</b></td
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class to encapsulate Madgwick Fusion access. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab4624c7f974e2e9328b62a6b945dbeb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4624c7f974e2e9328b62a6b945dbeb4">&#9670;&nbsp;</a></span>IMUFusion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IMUFusion::IMUFusion </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>iSamplePeriod</em> = <code>0.004f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>iStationaryThreshold</em> = <code>0.5f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>iAhrsGain</em> = <code>0.5f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>iGyroSensitivity</em> = <code>GYRO_SENSITIVITY</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>iAccelSensitivity</em> = <code>ACCEL_SENSITIVITY</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Default Constructor. </p>
+<p>Configures Madgwick Fusion for RealSense camera IMU </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a47060c975f3a11d03dca5de9de1e8098"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a47060c975f3a11d03dca5de9de1e8098">&#9670;&nbsp;</a></span>fuse()</h2>
 
@@ -136,7 +182,9 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>samplePeriod</b></td
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
+
+<p>Fuses gyro and accel data into Euler angles. </p>
+<p>Calls on Madgwick's Fusion library to perform IMU telemetry fusion. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">gyroData</td><td>A gyroscopic orientation 3-vector of type rs2_vector </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">accelData</td><td>An acceleration 3-vector of type rs2_vector </td></tr>

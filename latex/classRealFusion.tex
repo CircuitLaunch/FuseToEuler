@@ -22,13 +22,11 @@ Collaboration diagram for Real\+Fusion\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classRealFusion_a9632f71572a51d7db415793e1976a958}{Real\+Fusion} ()  throw (\+Exception)
-\begin{DoxyCompactList}\small\item\em Constructor. Checks I\+MU available, initializes librealsense. \end{DoxyCompactList}\item 
-virtual \hyperlink{classRealFusion_a2b1dd81581a3b922da3d8231d71524ce}{$\sim$\+Real\+Fusion} ()
-\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Default Constructor. \end{DoxyCompactList}\item 
 bool \hyperlink{classRealFusion_a77329f8bfa4390754ddb1c72b58281ff}{check\+I\+MU} ()
 \begin{DoxyCompactList}\small\item\em Checks availability of I\+MU. \end{DoxyCompactList}\item 
 void \hyperlink{classRealFusion_a0fa5b36d1b32622ec65c41e2c3852c2f}{tick} ()
-\begin{DoxyCompactList}\small\item\em Retrieves frames from librealsense2, extracts I\+MU data, and calls Fusion to perform Madgwick fusion to obtain Euler orientation which it caches in the angles public member. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Performs the fusion. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -60,25 +58,9 @@ A class to encapsulate librealsense2 and Fusion access.
 
 
 
-Constructor. Checks I\+MU available, initializes librealsense. 
+Default Constructor. 
 
-\begin{DoxyReturn}{Returns}
-void 
-\end{DoxyReturn}
-\mbox{\Hypertarget{classRealFusion_a2b1dd81581a3b922da3d8231d71524ce}\label{classRealFusion_a2b1dd81581a3b922da3d8231d71524ce}} 
-\index{Real\+Fusion@{Real\+Fusion}!````~Real\+Fusion@{$\sim$\+Real\+Fusion}}
-\index{````~Real\+Fusion@{$\sim$\+Real\+Fusion}!Real\+Fusion@{Real\+Fusion}}
-\subsubsection{\texorpdfstring{$\sim$\+Real\+Fusion()}{~RealFusion()}}
-{\footnotesize\ttfamily Real\+Fusion\+::$\sim$\+Real\+Fusion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
-
-
-
-Destructor. 
-
-\begin{DoxyReturn}{Returns}
-void 
-\end{DoxyReturn}
-
+Checks I\+MU available, initializes librealsense. 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classRealFusion_a77329f8bfa4390754ddb1c72b58281ff}\label{classRealFusion_a77329f8bfa4390754ddb1c72b58281ff}} 
@@ -102,9 +84,9 @@ true if I\+MU exists, false if not
 
 
 
-Retrieves frames from librealsense2, extracts I\+MU data, and calls Fusion to perform Madgwick fusion to obtain Euler orientation which it caches in the angles public member. 
+Performs the fusion. 
 
-\begin{DoxyReturn}{Returns}
+Retrieves frames from librealsense2, extracts I\+MU data, and calls Fusion to perform Madgwick fusion to obtain Euler orientation which it caches in the angles public member. \begin{DoxyReturn}{Returns}
 void 
 \end{DoxyReturn}
 

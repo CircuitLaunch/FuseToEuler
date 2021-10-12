@@ -12,14 +12,10 @@ A class to encapsulate Madgwick Fusion access.
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classIMUFusion_ab4624c7f974e2e9328b62a6b945dbeb4}\label{classIMUFusion_ab4624c7f974e2e9328b62a6b945dbeb4}} 
 \hyperlink{classIMUFusion_ab4624c7f974e2e9328b62a6b945dbeb4}{I\+M\+U\+Fusion} (float i\+Sample\+Period=0.\+004f, float i\+Stationary\+Threshold=0.\+5f, float i\+Ahrs\+Gain=0.\+5f, float i\+Gyro\+Sensitivity=\+G\+Y\+R\+O\+\_\+\+S\+E\+N\+S\+I\+T\+I\+V\+I\+T\+Y, float i\+Accel\+Sensitivity=\+A\+C\+C\+E\+L\+\_\+\+S\+E\+N\+S\+I\+T\+I\+V\+I\+T\+Y)
-\begin{DoxyCompactList}\small\item\em Constructor. Configures Madgwick Fusion for Real\+Sense camera I\+MU. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classIMUFusion_adee08e1eb18efbe29208619cf3aba857}\label{classIMUFusion_adee08e1eb18efbe29208619cf3aba857}} 
-virtual \hyperlink{classIMUFusion_adee08e1eb18efbe29208619cf3aba857}{$\sim$\+I\+M\+U\+Fusion} ()
-\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Default Constructor. \end{DoxyCompactList}\item 
 Fusion\+Euler\+Angles \hyperlink{classIMUFusion_a47060c975f3a11d03dca5de9de1e8098}{fuse} (rs2\+\_\+vector \&gyro\+Data, rs2\+\_\+vector \&accel\+Data)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Fuses gyro and accel data into Euler angles. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -48,6 +44,19 @@ A class to encapsulate Madgwick Fusion access.
 
 
 
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIMUFusion_ab4624c7f974e2e9328b62a6b945dbeb4}\label{classIMUFusion_ab4624c7f974e2e9328b62a6b945dbeb4}} 
+\index{I\+M\+U\+Fusion@{I\+M\+U\+Fusion}!I\+M\+U\+Fusion@{I\+M\+U\+Fusion}}
+\index{I\+M\+U\+Fusion@{I\+M\+U\+Fusion}!I\+M\+U\+Fusion@{I\+M\+U\+Fusion}}
+\subsubsection{\texorpdfstring{I\+M\+U\+Fusion()}{IMUFusion()}}
+{\footnotesize\ttfamily I\+M\+U\+Fusion\+::\+I\+M\+U\+Fusion (\begin{DoxyParamCaption}\item[{float}]{i\+Sample\+Period = {\ttfamily 0.004f},  }\item[{float}]{i\+Stationary\+Threshold = {\ttfamily 0.5f},  }\item[{float}]{i\+Ahrs\+Gain = {\ttfamily 0.5f},  }\item[{float}]{i\+Gyro\+Sensitivity = {\ttfamily GYRO\+\_\+SENSITIVITY},  }\item[{float}]{i\+Accel\+Sensitivity = {\ttfamily ACCEL\+\_\+SENSITIVITY} }\end{DoxyParamCaption})}
+
+
+
+Default Constructor. 
+
+Configures Madgwick Fusion for Real\+Sense camera I\+MU 
+
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classIMUFusion_a47060c975f3a11d03dca5de9de1e8098}\label{classIMUFusion_a47060c975f3a11d03dca5de9de1e8098}} 
 \index{I\+M\+U\+Fusion@{I\+M\+U\+Fusion}!fuse@{fuse}}
@@ -56,6 +65,10 @@ A class to encapsulate Madgwick Fusion access.
 {\footnotesize\ttfamily Fusion\+Euler\+Angles I\+M\+U\+Fusion\+::fuse (\begin{DoxyParamCaption}\item[{rs2\+\_\+vector \&}]{gyro\+Data,  }\item[{rs2\+\_\+vector \&}]{accel\+Data }\end{DoxyParamCaption})}
 
 
+
+Fuses gyro and accel data into Euler angles. 
+
+Calls on Madgwick\textquotesingle{}s Fusion library to perform I\+MU telemetry fusion. 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em gyro\+Data} & A gyroscopic orientation 3-\/vector of type rs2\+\_\+vector \\
 \hline

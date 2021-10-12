@@ -43,19 +43,15 @@ class IMUFusion
 {
     public:
         /**
-         * \fn IMUFusion()
-         * \brief Constructor. Configures Madgwick Fusion for RealSense camera IMU
+         * \brief Default Constructor.
+         * \details Configures Madgwick Fusion for RealSense camera IMU
          */
         IMUFusion(float iSamplePeriod = 0.004f, float iStationaryThreshold = 0.5f, float iAhrsGain = 0.5f, float iGyroSensitivity = GYRO_SENSITIVITY, float iAccelSensitivity = ACCEL_SENSITIVITY);
         
         /**
-         * \fn ~IMUFusion()
-         * \brief Destructor
-         */
-        virtual ~IMUFusion() { }
-
-        /**
          * \fn FusionEulerAngles fuse(rs2_vector &gyroData, rs2_vector &accelData)
+         * \brief Fuses gyro and accel data into Euler angles
+         * \details Calls on Madgwick's Fusion library to perform IMU telemetry fusion.
          * \param[in] gyroData A gyroscopic orientation 3-vector of type rs2_vector
          * \param[in] accelData An acceleration 3-vector of type rs2_vector
          * \returns A FusionEulerAngles structure containing the Roll, Pitch, and Yaw in degrees

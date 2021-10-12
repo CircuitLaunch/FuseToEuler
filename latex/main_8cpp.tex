@@ -20,18 +20,16 @@ Include dependency graph for main.\+cpp\+:\nopagebreak
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{main_8cpp_a9b99e599116053d9c4debd54231d2868}\label{main_8cpp_a9b99e599116053d9c4debd54231d2868}} 
-void {\bfseries sigint\+Handler} (int i\+Sig\+Num)
-\item 
-\mbox{\Hypertarget{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
-int {\bfseries main} (int argc, char $\ast$$\ast$argv)
-\end{DoxyCompactItemize}
+void \hyperlink{main_8cpp_a9b99e599116053d9c4debd54231d2868}{sigint\+Handler} (int i\+Sig\+Num)
+\begin{DoxyCompactList}\small\item\em Handler function for S\+I\+G\+I\+NT. \end{DoxyCompactList}\item 
+int \hyperlink{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Execution starts here. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{main_8cpp_ad87b684fbf7e057a5c08e1b0016dfe79}\label{main_8cpp_ad87b684fbf7e057a5c08e1b0016dfe79}} 
-atomic$<$ bool $>$ {\bfseries alive} \{true\}
-\end{DoxyCompactItemize}
+atomic$<$ bool $>$ \hyperlink{main_8cpp_ad87b684fbf7e057a5c08e1b0016dfe79}{alive} \{true\}
+\begin{DoxyCompactList}\small\item\em Atomically accessed variable shared between main process and interrupt handler. Enables interrupt handler to signal that the process should terminate. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -52,3 +50,27 @@ You should have received a copy of the G\+NU General Public License along with F
 \begin{DoxyAuthor}{Author}
 Edward Janne 
 \end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{main.\+cpp@{main.\+cpp}!main@{main}}
+\index{main@{main}!main.\+cpp@{main.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Execution starts here. 
+
+Installs an interrupt handler to intercept Ctrl-\/C interrupts. Then instantiates a \hyperlink{classRealFusion}{Real\+Fusion} class, and enters an infinite loop in which it repeatedly calls \hyperlink{classRealFusion_a0fa5b36d1b32622ec65c41e2c3852c2f}{Real\+Fusion\+::tick()} to get I\+MU telemetry and fuse it to derive stable Euler orientation. Every second, the current orientation is printed to the console. \mbox{\Hypertarget{main_8cpp_a9b99e599116053d9c4debd54231d2868}\label{main_8cpp_a9b99e599116053d9c4debd54231d2868}} 
+\index{main.\+cpp@{main.\+cpp}!sigint\+Handler@{sigint\+Handler}}
+\index{sigint\+Handler@{sigint\+Handler}!main.\+cpp@{main.\+cpp}}
+\subsubsection{\texorpdfstring{sigint\+Handler()}{sigintHandler()}}
+{\footnotesize\ttfamily void sigint\+Handler (\begin{DoxyParamCaption}\item[{int}]{i\+Sig\+Num }\end{DoxyParamCaption})}
+
+
+
+Handler function for S\+I\+G\+I\+NT. 
+
+The address of this function is attached as the S\+I\+G\+I\+NT interrupt handler in the main function. It sets the atomic variable, alive, to false. 

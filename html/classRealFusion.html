@@ -86,16 +86,13 @@ Collaboration diagram for RealFusion:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9632f71572a51d7db415793e1976a958"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRealFusion.html#a9632f71572a51d7db415793e1976a958">RealFusion</a> ()  throw (Exception)</td></tr>
-<tr class="memdesc:a9632f71572a51d7db415793e1976a958"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Checks IMU available, initializes librealsense.  <a href="#a9632f71572a51d7db415793e1976a958">More...</a><br /></td></tr>
+<tr class="memdesc:a9632f71572a51d7db415793e1976a958"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor.  <a href="#a9632f71572a51d7db415793e1976a958">More...</a><br /></td></tr>
 <tr class="separator:a9632f71572a51d7db415793e1976a958"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b1dd81581a3b922da3d8231d71524ce"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRealFusion.html#a2b1dd81581a3b922da3d8231d71524ce">~RealFusion</a> ()</td></tr>
-<tr class="memdesc:a2b1dd81581a3b922da3d8231d71524ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#a2b1dd81581a3b922da3d8231d71524ce">More...</a><br /></td></tr>
-<tr class="separator:a2b1dd81581a3b922da3d8231d71524ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77329f8bfa4390754ddb1c72b58281ff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRealFusion.html#a77329f8bfa4390754ddb1c72b58281ff">checkIMU</a> ()</td></tr>
 <tr class="memdesc:a77329f8bfa4390754ddb1c72b58281ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks availability of IMU.  <a href="#a77329f8bfa4390754ddb1c72b58281ff">More...</a><br /></td></tr>
 <tr class="separator:a77329f8bfa4390754ddb1c72b58281ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fa5b36d1b32622ec65c41e2c3852c2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRealFusion.html#a0fa5b36d1b32622ec65c41e2c3852c2f">tick</a> ()</td></tr>
-<tr class="memdesc:a0fa5b36d1b32622ec65c41e2c3852c2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves frames from librealsense2, extracts IMU data, and calls Fusion to perform Madgwick fusion to obtain Euler orientation which it caches in the angles public member.  <a href="#a0fa5b36d1b32622ec65c41e2c3852c2f">More...</a><br /></td></tr>
+<tr class="memdesc:a0fa5b36d1b32622ec65c41e2c3852c2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the fusion.  <a href="#a0fa5b36d1b32622ec65c41e2c3852c2f">More...</a><br /></td></tr>
 <tr class="separator:a0fa5b36d1b32622ec65c41e2c3852c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -137,36 +134,8 @@ rs2::pipeline&#160;</td><td class="memItemRight" valign="bottom"><b>pl</b></td><
       </table>
 </div><div class="memdoc">
 
-<p>Constructor. Checks IMU available, initializes librealsense. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-
-</div>
-</div>
-<a id="a2b1dd81581a3b922da3d8231d71524ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b1dd81581a3b922da3d8231d71524ce">&#9670;&nbsp;</a></span>~RealFusion()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">RealFusion::~RealFusion </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Destructor. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<p>Default Constructor. </p>
+<p>Checks IMU available, initializes librealsense. </p>
 
 </div>
 </div>
@@ -206,8 +175,8 @@ rs2::pipeline&#160;</td><td class="memItemRight" valign="bottom"><b>pl</b></td><
       </table>
 </div><div class="memdoc">
 
-<p>Retrieves frames from librealsense2, extracts IMU data, and calls Fusion to perform Madgwick fusion to obtain Euler orientation which it caches in the angles public member. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<p>Performs the fusion. </p>
+<p>Retrieves frames from librealsense2, extracts IMU data, and calls Fusion to perform Madgwick fusion to obtain Euler orientation which it caches in the angles public member. </p><dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 </div>
 </div>

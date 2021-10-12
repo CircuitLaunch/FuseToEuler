@@ -40,18 +40,10 @@ class RealFusion
 {
     public:
         /**
-         * \fn RealFusion()
-         * \brief Constructor. Checks IMU available, initializes librealsense.
-         * \returns void
+         * \brief Default Constructor.
+         * \details Checks IMU available, initializes librealsense.
          */
         RealFusion() throw(Exception);
-
-        /**
-         * \fn ~RealFusion()
-         * \brief Destructor
-         * \returns void
-         */
-        virtual ~RealFusion() { }
 
         /**
          * \fn bool checkIMU()
@@ -62,9 +54,10 @@ class RealFusion
 
         /**
          * \fn void tick()
-         * \brief Retrieves frames from librealsense2, extracts IMU data, and
+         * \brief Performs the fusion.
+         * \details Retrieves frames from librealsense2, extracts IMU data, and
          * calls Fusion to perform Madgwick fusion to obtain Euler orientation
-         * which it caches in the angles public member
+         * which it caches in the angles public member.
          * \returns void
          */
         void tick();

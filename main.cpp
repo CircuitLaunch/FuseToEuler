@@ -82,21 +82,36 @@ using namespace std;
 using namespace std::chrono;
 
 // Create an interrupt safe variable
-atomic<bool> alive{true};
+atomic<bool> alive{true}; ///< Atomically accessed variable shared between main process and interrupt handler. Enables interrupt handler to signal that the process should terminate.
 
-// Handler function for SIGINT
+/**
+ * \fn void sigintHandler(int iSigNum)
+ * \brief Handler function for SIGINT
+ * \details The address of this function is attached as the SIGINT 
+ * interrupt handler in the main function. It sets the atomic variable, 
+ * alive, to false.
+ */
 void sigintHandler(int iSigNum)
 {
     alive = false;
 }
 
+/**
+ * \fn int main(int argc, char **argv)
+ * \brief Execution starts here.
+ * \details Installs an interrupt handler to intercept Ctrl-C interrupts. 
+ * Then instantiates a RealFusion class, and enters an infinite loop in
+ * which it repeatedly calls RealFusion::tick() to get IMU telemetry and
+ * fuse it to derive stable Euler orientation. Every second, the current
+ * orientation is printed to the console.
+ */
 int main(int argc, char **argv)
 {
     // Install custom SIGINT handler
     signal(SIGINT, sigintHandler);
 
     try {
-        cout << "RealFusion initializing..." << endl;
+        cout << "FuseToEuler initializing..." << endl;
 
         // Instantiate RealFusion class to initialize Madwick Fusion and librealsense2
         RealFusion r;

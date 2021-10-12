@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tick',['tick',['../classRealFusion.html#a0fa5b36d1b32622ec65c41e2c3852c2f',1,'RealFusion']]]
+  ['realfusion',['RealFusion',['../classRealFusion.html#a9632f71572a51d7db415793e1976a958',1,'RealFusion']]]
 ];

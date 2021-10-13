@@ -35,9 +35,13 @@
 
 #include "IMUFusion.hpp"
 #include "Exception.hpp"
+#include "LinearAlgebra.hpp"
 
 class RealFusion
 {
+    private:
+        static rs2::pointcloud *pcPtr;
+
     public:
         /**
          * \brief Default Constructor.
@@ -64,8 +68,11 @@ class RealFusion
 
         FusionEulerAngles angles; //< Member to cache Euler orientations in degrees
 
+        void computeNormals(const rs2::vertex *vtxArray, int frameWidth, int frameHeight, int delta, vec3 *normArray);
+
     protected:
         rs2::pipeline pl;
+        rs2::pointcloud &pc;
         IMUFusion fuser;
 };
 

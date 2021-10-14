@@ -1,7 +1,9 @@
 #include "LinearAlgebra.hpp"
 #include <stdio.h>
 #include <iostream>
+#include <math.h>
 #include "Compute.hpp"
+#include "vecadd.cuh"
 
 using namespace std;
 
@@ -22,6 +24,58 @@ int main(int argc, char **argv)
         if(!(j&3)) cout << endl;
     }
 
+    size_t size = 50000;
+    size_t byteSize = size * sizeof(float);
+
+    float *hostA, *hostB, *hostC;
+    hostA = new float[size];
+    hostB = new float[size];
+    hostC = new float[size];
+
+    // Initialize the host input vectors
+    for (int i = 0; i < size; ++i)
+    {
+        hostA[i] = rand()/(float)RAND_MAX;
+        hostB[i] = rand()/(float)RAND_MAX;
+    }
+
+    Compute compute;
+    Compute::Buffer
+        devA = compute.createBuffer(byteSize, hostA),
+        devB = compute.createBuffer(byteSize, hostB),
+        devC = compute.createBuffer(byteSize);
+
+    VecAdd functor;
+    int threadsPerBlock = 256;
+    int blocksPerGrid = (size + threadsPerBlock - 1) / threadsPerBlock;
+    cudaError_t err = functor(blocksPerGrid, threadsPerBlock, &devA, &devB, &devC);
+
+    if(err != cudaSuccess) {
+        cerr << "vecadd failed: " << err << " " << cudaGetErrorString(err) << endl;
+    } else {
+        err = devC.copyToHost(hostC, byteSize);
+        if(err != cudaSuccess) {
+            cerr << "Failed to retrieve results from device: " << err << " " << cudaGetErrorString(err) << endl;
+        } else {
+            bool valid = true;
+            for(size_t i = 0; i < size; i++) {
+                if(fabs(hostA[i] + hostB[i] - hostC[i]) > 1e-5) {
+                    cerr << "vecadd results incorrect!" << endl;
+                    valid = false;
+                    break;
+                }
+            }
+            if(valid) {
+                cout << "vecadd verified" << endl;
+            }
+        }
+    }
+
+    delete [] hostA;
+    delete [] hostB;
+    delete [] hostC;
+
+    /*
     Compute compute;
 
     switch(compute.getDeviceType()) {
@@ -71,6 +125,7 @@ int main(int argc, char **argv)
     for(size_t i = 0; i < size; i++) {
         cout << dataC[i] << endl;
     }
+    */
 
     cout << "OK\n";
 }

@@ -1,13 +1,57 @@
 #ifndef __COMPUTE_HPP__
 #define __COMPUTE_HPP__
 
-#include <pocl/poclu.h>
-#include <CL/cl.h>
-
+#include <cstdarg>
 #include <string>
 #include <vector>
 
+#include "Exception.hpp"
+
 using namespace std;
+
+#define USECUDA true
+
+#include <cuda_runtime.h>
+
+class Compute
+{
+    public:
+        Compute();
+        virtual ~Compute();
+
+        class Buffer
+        {
+            friend class Compute;
+            
+            public:
+                Buffer(float *iDeviceBuffer, size_t iByteSize);
+                virtual ~Buffer();
+
+                cudaError_t copyToDevice(void *iHostBuffer, size_t iBytes);
+                cudaError_t copyToHost(void *oHostBuffer, size_t iBytes);
+
+                float *getDeviceBuffer() { return buffer; }
+                const float *getDeviceBuffer() const { return buffer; }
+
+            protected:
+                float *buffer;
+                size_t byteSize;
+        };
+
+        Buffer createBuffer(size_t iByteSize, void *iData = nullptr);
+
+        class Functor
+        {
+            friend class Compute;
+
+            public:
+                virtual cudaError_t operator()(size_t iBlocksPerGrid, size_t iThreadsPerBlock, ...) = 0;
+        };
+};
+
+/*
+#include <pocl/poclu.h>
+#include <CL/cl.h>
 
 class Compute
 {
@@ -84,5 +128,7 @@ class Compute
         cl_command_queue queue;
         cl_platform_id platform;
 };
+
+*/
 
 #endif

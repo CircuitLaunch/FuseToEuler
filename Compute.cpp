@@ -4,6 +4,47 @@
 using namespace std;
 
 Compute::Compute()
+{ }
+
+Compute::~Compute()
+{ }
+
+    Compute::Buffer::Buffer(float *iDeviceBuffer, size_t iByteSize)
+    : buffer(iDeviceBuffer), byteSize(iByteSize)
+    { }
+
+    Compute::Buffer::~Buffer()
+    {
+        cudaError_t err = cudaFree(buffer);
+        if(err != cudaSuccess) {
+            cerr << "Compute::Buffer::~Buffer: failed to free device buffer" << endl;
+        }
+    }
+
+    cudaError_t Compute::Buffer::copyToDevice(void *iHostBuffer, size_t iBytes)
+    {
+        cudaMemcpy(buffer, iHostBuffer, iBytes, cudaMemcpyHostToDevice);
+    }
+
+    cudaError_t Compute::Buffer::copyToHost(void *oHostBuffer, size_t iBytes)
+    {
+        cudaMemcpy(oHostBuffer, buffer, iBytes, cudaMemcpyDeviceToHost);
+    }
+
+Compute::Buffer Compute::createBuffer(size_t iByteSize, void *iData)
+{
+    float *buffer;
+    cudaError_t err = cudaMalloc((void **) &buffer, iByteSize);
+    if(err != cudaSuccess) throw(Exception(__FILE__, __LINE__, "Compute::createBuffer", err, cudaGetErrorString(err)));
+    if(iData) {
+        err = cudaMemcpy(iData, buffer, iByteSize, cudaMemcpyDeviceToHost);
+        if(err != cudaSuccess) throw(Exception(__FILE__, __LINE__, "Compute::createBuffer", err, cudaGetErrorString(err)));
+    }
+    return Buffer(buffer, iByteSize);
+}
+
+/*
+Compute::Compute()
 {
     cl_uint numPlats;
     clGetPlatformIDs(0, nullptr, &numPlats);
@@ -252,3 +293,5 @@ void Compute::enqueueKernel(Kernel &iKernel, size_t iGlobalWorkSize, size_t iLoc
             break;
     }
 }
+
+*/

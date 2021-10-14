@@ -80,7 +80,7 @@ float mat4::minorDeterminant(int *colIndices, int level) const
         int i0 = 8 + colIndices[0], i1 = 8 + colIndices[1], i2 = 12 + colIndices[0], i3 = 12 + colIndices[1];
         return a[i0] * a[i3] - a[i2] * a[i1];
     }
-    int minorColIndices[level-1];
+    int *minorColIndices = new int[level - 1];
     float det = 0.0;
     int o = (4 - level) << 2;
     int i = level;
@@ -89,6 +89,7 @@ float mat4::minorDeterminant(int *colIndices, int level) const
         while(j--) minorColIndices[j] = colIndices[(j < i) ? j : j + 1];
         det += a[o + colIndices[i]] * minorDeterminant(minorColIndices, level-1) * float ((((i & 1) == 0) << 1) - 1);
     }
+    delete [] minorColIndices;
     return det;
 }
 

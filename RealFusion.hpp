@@ -47,7 +47,7 @@ class RealFusion
          * \brief Default Constructor.
          * \details Checks IMU available, initializes librealsense.
          */
-        RealFusion() throw(Exception);
+        RealFusion() /* throw(Exception) */;
 
         /**
          * \fn bool checkIMU()

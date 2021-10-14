@@ -29,7 +29,7 @@
 
 rs2::pointcloud *RealFusion::pcPtr = new rs2::pointcloud();
 
-RealFusion::RealFusion() throw(Exception)
+RealFusion::RealFusion() /* throw(Exception) */
 : pl(), fuser(), pc(*pcPtr)
 {
     // Ensure an IMU is available. If not, throw exception.

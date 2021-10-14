@@ -13,122 +13,80 @@ using namespace std;
 
 #include <cuda_runtime.h>
 
-class Compute
+namespace Compute
 {
-    public:
-        Compute();
-        virtual ~Compute();
 
-        class Buffer
-        {
-            friend class Compute;
-            
-            public:
-                Buffer(float *iDeviceBuffer, size_t iByteSize);
-                virtual ~Buffer();
+    template <class T>
+    class Buffer
+    {
+        friend class Compute;
+        
+        public:
+            Buffer(T *iDeviceBuffer, size_t iCount);
+            virtual ~Buffer();
 
-                cudaError_t copyToDevice(void *iHostBuffer, size_t iBytes);
-                cudaError_t copyToHost(void *oHostBuffer, size_t iBytes);
+            cudaError_t copyToDevice(const T *iHostBuffer, size_t iCount);
+            cudaError_t copyToHost(T *oHostBuffer, size_t iCount);
 
-                float *getDeviceBuffer() { return buffer; }
-                const float *getDeviceBuffer() const { return buffer; }
+            T *getDeviceBuffer() { return buffer; }
+            const T *getDeviceBuffer() const { return buffer; }
 
-            protected:
-                float *buffer;
-                size_t byteSize;
-        };
+        protected:
+            T *buffer;
+            size_t count;
+    };
 
-        Buffer createBuffer(size_t iByteSize, void *iData = nullptr);
 
-        class Functor
-        {
-            friend class Compute;
+    template <class T>
+    Buffer<T> createBuffer(size_t iCount, T *iData = nullptr);
 
-            public:
-                virtual cudaError_t operator()(size_t iBlocksPerGrid, size_t iThreadsPerBlock, ...) = 0;
-        };
-};
+    class Functor
+    {
+        friend class Compute;
 
-/*
-#include <pocl/poclu.h>
-#include <CL/cl.h>
+        public:
+            virtual cudaError_t operator()(size_t iBlocksPerGrid, size_t iThreadsPerBlock, ...) = 0;
+    };
 
-class Compute
-{
-    public:
-        Compute();
-        virtual ~Compute();
+    template <class T>
+    Buffer<T>::Buffer(T *iDeviceBuffer, size_t iCount)
+    : buffer(iDeviceBuffer), count(iCount)
+    { }
 
-        class Buffer
-        {
-            friend class Compute;
-            friend class Kernel;
-            
-            public:
-                virtual ~Buffer();
-                size_t size();
+    template <class T>
+    Buffer<T>::~Buffer()
+    {
+        cudaError_t err = cudaFree(buffer);
+        if(err != cudaSuccess) {
+            cerr << "Compute::Buffer::~Buffer: failed to free device buffer" << endl;
+        }
+    }
 
-            protected:
-                Buffer(cl_mem iBufferId, size_t iSize);
+    template <class T>
+    cudaError_t Buffer<T>::copyToDevice(const T *iHostBuffer, size_t iCount)
+    {
+        cudaMemcpy(buffer, (void *) iHostBuffer, iCount * sizeof(T), cudaMemcpyHostToDevice);
+    }
 
-                cl_mem buffer;
-                size_t byteSize;
-        };
+    template <class T>
+    cudaError_t Buffer<T>::copyToHost(T *oHostBuffer, size_t iCount)
+    {
+        cudaMemcpy((void *) oHostBuffer, buffer, iCount * sizeof(T), cudaMemcpyDeviceToHost);
+    }
 
-        Buffer createBuffer(int iType, size_t iSize, void *iData = nullptr);
+    template <class T>
+    Buffer<T> createBuffer(size_t iCount, T *iData)
+    {
+        T *buffer;
+        cudaError_t err = cudaMalloc((void **) &buffer, iCount * sizeof(T));
+        if(err != cudaSuccess) throw(Exception(__FILE__, __LINE__, "Compute::createBuffer", err, cudaGetErrorString(err)));
+        if(iData) {
+            err = cudaMemcpy(iData, (void *) buffer, iCount * sizeof(T), cudaMemcpyDeviceToHost);
+            if(err != cudaSuccess) throw(Exception(__FILE__, __LINE__, "Compute::createBuffer", err, cudaGetErrorString(err)));
+        }
+        return Buffer<T>(buffer, iCount);
+    }
 
-        void writeBuffer(Buffer &iBuffer, void *iData, size_t iSize);
-        void readBuffer(Buffer &iBuffer, void *oData, size_t iSize);
-
-        class Program
-        {
-            friend class Compute;
-
-            public:
-                virtual ~Program();
-
-            protected:
-                Program(cl_program iProgramId);
-
-                cl_program program;
-        };
-
-        Program createProgram(const string &iSourceName);
-
-        class Kernel
-        {
-            friend class Compute;
-
-            public:
-                virtual ~Kernel();
-
-                void getGlobalWorkSize(size_t *oSizes);
-                size_t getWorkGroupSize();
-                void setArgs(const vector<Buffer *> &iBuffers);
-
-            protected:
-                Kernel(cl_kernel iKernelId);
-
-                cl_kernel kernel;
-        };
-
-        Kernel createKernel(Program &iProgram, const string &iFuncName);
-
-        cl_device_type getDeviceType();
-        cl_uint getDeviceMaxComputeUnits();
-        cl_uint getDeviceMaxWorkItemDimensions();
-        void getDeviceMaxWorkItemSizes(size_t *oSizes);
-        size_t getDeviceMaxWorkGroupSize();
-
-        void enqueueKernel(Kernel &iKernel, size_t iGlobalWorkSize, size_t iLocalWorkSize);
-
-    // protected:
-        cl_context context;
-        cl_device_id device;
-        cl_command_queue queue;
-        cl_platform_id platform;
-};
-
-*/
+}
 
 #endif

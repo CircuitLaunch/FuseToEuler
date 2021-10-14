@@ -1,6 +1,7 @@
 #ifndef __VECADD_CUH__
 #define __VECADD_CUH__
 
+#include <vector_types.h>
 #include "Compute.hpp"
 
 class VecAdd : public Compute::Functor

@@ -7,6 +7,28 @@
 
 using namespace std;
 
+/*
+__host__ float3 operator+(const float3 &a, const float3 &b)
+{
+    return make_float3(a.x+b.x, a.y+b.y, a.z+b.z);
+}
+
+float3 operator-(const float3 &a, const float3 &b)
+{
+    return make_float3(a.x-b.x, a.y-b.y, a.z-b.z);
+}
+
+bool operator>(const float3 &a, float s)
+{
+    return a.x > s || a.y > s || a.z > s;
+}
+
+float3 fabs(const float3 &a)
+{
+    return make_float3(fabs(a.x), fabs(a.y), fabs(a.z));
+}
+*/
+
 int main(int argc, char **argv)
 {
     float a0[] = { 3.0, 4.0, 5.0, 2.0, 6.0, 1.0, 1.0, 4.0, 4.0, -2.0, 5.0, 8.0, 2.0, 8.0, 7.0, 3.0 };
@@ -25,25 +47,27 @@ int main(int argc, char **argv)
     }
 
     size_t size = 50000;
-    size_t byteSize = size * sizeof(float);
 
-    float *hostA, *hostB, *hostC;
-    hostA = new float[size];
-    hostB = new float[size];
-    hostC = new float[size];
+    float3 *hostA, *hostB, *hostC;
+    hostA = new float3[size];
+    hostB = new float3[size];
+    hostC = new float3[size];
 
     // Initialize the host input vectors
     for (int i = 0; i < size; ++i)
     {
-        hostA[i] = rand()/(float)RAND_MAX;
-        hostB[i] = rand()/(float)RAND_MAX;
+        hostA[i].x = rand()/(float)RAND_MAX;
+        hostA[i].y = rand()/(float)RAND_MAX;
+        hostA[i].z = rand()/(float)RAND_MAX;
+        hostB[i].x = rand()/(float)RAND_MAX;
+        hostB[i].y = rand()/(float)RAND_MAX;
+        hostB[i].z = rand()/(float)RAND_MAX;
     }
 
-    Compute compute;
-    Compute::Buffer
-        devA = compute.createBuffer(byteSize, hostA),
-        devB = compute.createBuffer(byteSize, hostB),
-        devC = compute.createBuffer(byteSize);
+    Compute::Buffer<float3>
+        devA = Compute::createBuffer<float3>(size, hostA),
+        devB = Compute::createBuffer<float3>(size, hostB),
+        devC = Compute::createBuffer<float3>(size);
 
     VecAdd functor;
     int threadsPerBlock = 256;
@@ -53,13 +77,23 @@ int main(int argc, char **argv)
     if(err != cudaSuccess) {
         cerr << "vecadd failed: " << err << " " << cudaGetErrorString(err) << endl;
     } else {
-        err = devC.copyToHost(hostC, byteSize);
+        err = devC.copyToHost(hostC, size);
         if(err != cudaSuccess) {
             cerr << "Failed to retrieve results from device: " << err << " " << cudaGetErrorString(err) << endl;
         } else {
             bool valid = true;
             for(size_t i = 0; i < size; i++) {
-                if(fabs(hostA[i] + hostB[i] - hostC[i]) > 1e-5) {
+                if(fabs(hostA[i].x + hostB[i].x - hostC[i].x) > 1e-5) {
+                    cerr << "vecadd results incorrect!" << endl;
+                    valid = false;
+                    break;
+                }
+                if(fabs(hostA[i].y + hostB[i].y - hostC[i].y) > 1e-5) {
+                    cerr << "vecadd results incorrect!" << endl;
+                    valid = false;
+                    break;
+                }
+                if(fabs(hostA[i].z + hostB[i].z - hostC[i].z) > 1e-5) {
                     cerr << "vecadd results incorrect!" << endl;
                     valid = false;
                     break;
@@ -74,58 +108,6 @@ int main(int argc, char **argv)
     delete [] hostA;
     delete [] hostB;
     delete [] hostC;
-
-    /*
-    Compute compute;
-
-    switch(compute.getDeviceType()) {
-        case CL_DEVICE_TYPE_GPU: cout << "OpenCL device type: GPU\n"; break;
-        case CL_DEVICE_TYPE_ACCELERATOR: cout << "OpenCL device type: ACCELERATOR\n"; break;
-        case CL_DEVICE_TYPE_CPU: cout << "OpenCL device type: CPU\n"; break;
-        case CL_DEVICE_TYPE_DEFAULT: cout << "OpenCL device type: CUSTOM\n"; break;
-        case CL_DEVICE_TYPE_CUSTOM: cout << "OpenCL device type: DEFAULT\n"; break;
-    }
-
-    Compute::Program program = compute.createProgram(string("vecadd"));
-    Compute::Kernel kernel = compute.createKernel(program, string("vecadd"));
-
-    const size_t size = 128;
-    cl_float dataA[size];
-    cl_float dataB[size];
-    cl_float dataC[size];
-
-    for(size_t i = 0; i < size; i++) {
-        dataA[i] = (cl_float) i;
-        dataA[i] = (cl_float) (size - i);
-        dataC[i] = 0.0;
-    }
-
-    poclu_bswap_cl_float_array(compute.device, (cl_float *) dataA, 4 * size);
-    poclu_bswap_cl_float_array(compute.device, (cl_float *) dataB, 4 * size);
-
-    Compute::Buffer
-        bufA = compute.createBuffer(CL_MEM_READ_ONLY, sizeof(dataA)),
-        bufB = compute.createBuffer(CL_MEM_READ_ONLY, sizeof(dataB)),
-        bufC = compute.createBuffer(CL_MEM_READ_WRITE, sizeof(dataC));
-
-    compute.writeBuffer(bufA, dataA, sizeof(dataA));
-    compute.writeBuffer(bufB, dataB, sizeof(dataB));
-    
-    vector<Compute::Buffer *> args;
-    args.push_back(&bufA);
-    args.push_back(&bufB);
-    args.push_back(&bufC);
-    kernel.setArgs(args);
-    compute.enqueueKernel(kernel, size, size);
-
-    compute.readBuffer(bufC, dataC, sizeof(dataC));
-
-    poclu_bswap_cl_float_array(compute.device, (cl_float *) dataC, 4 * size);
-
-    for(size_t i = 0; i < size; i++) {
-        cout << dataC[i] << endl;
-    }
-    */
 
     cout << "OK\n";
 }
